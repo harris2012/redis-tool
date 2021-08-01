@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="RedisTool.Pages.RemovePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ctrl="clr-namespace:RedisTool.Controls"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Resource/ResDictionary.xaml" />
+    </UserControl.Resources>
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0">Provider</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0">Key</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" Name="ProviderTextBox" IsTabStop="True" TabIndex="4" Text="{Binding RedisProvider, Mode=TwoWay, Source={StaticResource appSettings}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="KeyTextBox" IsTabStop="True" TabIndex="1"></TextBox>
+            <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Width="100" Command="{Binding Mode=OneWay, Source={StaticResource RemoveCommand}}" IsTabStop="True" TabIndex="2">Remove</Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBox Name="OutputTextBox" AcceptsReturn="True" IsTabStop="True" TabIndex="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="0" />
+            <ctrl:StatusBar x:Name="StatusBar" Grid.Row="1" />
+        </Grid>
+        <StackPanel Grid.Row="3" HorizontalAlignment="Left" Orientation="Horizontal">
+            <CheckBox x:Name="ComfirmRequiredCheckBox" IsChecked="{Binding ComfirmRequired, Mode=TwoWay, Source={StaticResource appSettings},UpdateSourceTrigger=PropertyChanged}" IsTabStop="False" />
+            <TextBlock>Confirm Required</TextBlock>
+        </StackPanel>
+    </Grid>
+    <UserControl.CommandBindings>
+        <CommandBinding
+            Command="{StaticResource RemoveCommand}"
+            CanExecute="RemoveCommand_CanExecute"
+            Executed="RemoveCommand_Executed"/>
+    </UserControl.CommandBindings>
+</UserControl>

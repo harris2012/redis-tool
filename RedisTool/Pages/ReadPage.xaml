@@ -1,0 +1,64 @@
+﻿<UserControl  x:Class="RedisTool.Pages.ReadPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:ctrl="clr-namespace:RedisTool.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Resource/ResDictionary.xaml" />
+    </UserControl.Resources>
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0">Provider</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0">Key</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0">Type</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" IsTabStop="True" TabIndex="8" Name="ProviderTextBox" Text="{Binding RedisProvider, Mode=TwoWay, Source={StaticResource appSettings}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" TabIndex="1" IsTabStop="True" Name="KeyTextBox"></TextBox>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <ResourceDictionary Source="/Resource/ResDictionary2.xaml" />
+                </StackPanel.Resources>
+                <RadioButton Name="StringRadioButton" IsChecked="True" IsTabStop="True" TabIndex="2" />
+                <TextBlock>String</TextBlock>
+                <RadioButton Name="ListRadioButton" IsTabStop="True" TabIndex="3" />
+                <TextBlock>List</TextBlock>
+                <RadioButton Name="DictionaryRadioButton" IsTabStop="True" TabIndex="4" />
+                <TextBlock>Dictionary</TextBlock>
+                <RadioButton Name="HashSetRadioButton" IsTabStop="True" TabIndex="5" />
+                <TextBlock>HashSet</TextBlock>
+            </StackPanel>
+            <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Width="100" Command="{Binding Mode=OneWay, Source={StaticResource ReadCommand}}" IsTabStop="True" TabIndex="6">Get</Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBox Name="OutputTextBox" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="0" TabIndex="7" />
+            <ctrl:StatusBar x:Name="StatusBar" Grid.Row="1" />
+        </Grid>
+    </Grid>
+    <UserControl.CommandBindings>
+        <CommandBinding
+            Command="{StaticResource ReadCommand}"
+            CanExecute="ReadCommand_CanExecute"
+            Executed="ReadCommand_Executed"/>
+    </UserControl.CommandBindings>
+</UserControl>

@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="RedisTool.Pages.WritePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:ctrl="clr-namespace:RedisTool.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Resource/ResDictionary.xaml" />
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding
+            Command="{StaticResource WriteCommand}"
+            CanExecute="WriteCommand_CanExecute"
+            Executed="WriteCommand_Executed"/>
+    </UserControl.CommandBindings>
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Width="60"><Run Text="Provider"/></TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="ProviderTextBox" IsTabStop="True" TabIndex="10" Text="{Binding RedisProvider, Mode=TwoWay, Source={StaticResource appSettings}, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Width="60"><Run Text="Key"/></TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="KeyTextBox" IsTabStop="True" TabIndex="1" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Width="60"><Run Text="Type"/></TextBlock>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <ResourceDictionary Source="/Resource/ResDictionary2.xaml" />
+                </StackPanel.Resources>
+                <RadioButton x:Name="StringRadioButton" IsChecked="True" IsTabStop="True" TabIndex="2" />
+                <TextBlock><Run Text="String"/></TextBlock>
+                <RadioButton x:Name="ListRadioButton" IsTabStop="True" TabIndex="3" />
+                <TextBlock><Run Text="List"/></TextBlock>
+                <RadioButton x:Name="DictionaryRadioButton" IsTabStop="True" TabIndex="4" />
+                <TextBlock><Run Text="Dictionary"/></TextBlock>
+                <RadioButton x:Name="HashSetRadioButton" IsTabStop="True" TabIndex="5" />
+                <TextBlock><Run Text="HashSet"/></TextBlock>
+                <RadioButton x:Name="JsonRadioButton" IsTabStop="True" TabIndex="6" />
+                <TextBlock><Run Text="Json" ToolTip="Will save as dictionary" /></TextBlock>
+            </StackPanel>
+            <Grid Grid.Row="3" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Width="60" Grid.Column="0" Visibility="{Binding IsChecked, Converter={StaticResource visibilityConvert}, ElementName=DictionaryRadioButton}">
+                    <Run Text="SubKey" />
+                </TextBlock>
+                <TextBox Grid.Column="1" Name="SubKeyTextBox" Visibility="{Binding IsChecked, Converter={StaticResource visibilityConvert}, ElementName=DictionaryRadioButton}" IsTabStop="True" TabIndex="6" />
+            </Grid>
+            <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Width="100" Command="{Binding Mode=OneWay, Source={StaticResource WriteCommand}}" Content="Write" IsTabStop="True" TabIndex="8"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Width="60" VerticalAlignment="Top">
+                <Run Text="Value"/>
+            </TextBlock>
+            <TextBox Grid.Column="1" Name="ValueTextBox" AcceptsReturn="True" IsTabStop="True" TabIndex="7"/>
+        </Grid>
+        <ctrl:StatusBar Grid.Row="2" x:Name="StatusBar"/>
+        <StackPanel Grid.Row="3" HorizontalAlignment="Left" Orientation="Horizontal">
+            <CheckBox x:Name="ComfirmRequiredCheckBox" IsChecked="{Binding ComfirmRequired, Mode=TwoWay, Source={StaticResource appSettings},UpdateSourceTrigger=PropertyChanged}" IsTabStop="False" />
+            <TextBlock>Confirm Required</TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

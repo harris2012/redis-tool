@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="RedisTool.Content.Contents.AboutPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Padding" Value="0,5,5,0" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="0,5,0,5" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <ScrollViewer>
+            <StackPanel MinWidth="200">
+                <TextBlock Text="Version" Style="{StaticResource Heading2}" />
+                <TextBox>3.1.0 release</TextBox>
+                
+                <TextBlock Text="Reference" Style="{StaticResource Heading2}" />
+                <TextBox IsReadOnly="True">StackExchange.Redis https://github.com/StackExchange/StackExchange.Redis</TextBox>
+
+                <TextBlock Style="{StaticResource Heading2}">UI Framework</TextBlock>
+                <TextBox IsReadOnly="True">Modern UI for WPF https://github.com/firstfloorsoftware/mui</TextBox>
+
+                <TextBlock Text="Author" Style="{StaticResource Heading2}" />
+                <TextBox IsReadOnly="True">harriszhang@live.com</TextBox>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

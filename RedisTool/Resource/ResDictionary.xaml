@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:RedisTool"
+                    xmlns:i="clr-namespace:System.Windows.Input;assembly=PresentationCore">
+    <Style TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="TextAlignment" Value="Right" />
+    </Style>
+    <Style TargetType="TextBox">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontFamily" Value="Verdana" />
+    </Style>
+    <Style TargetType="StackPanel">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <Style TargetType="Button">
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <i:RoutedCommand x:Key="ReadCommand" />
+    <i:RoutedCommand x:Key="WriteCommand" />
+    <i:RoutedCommand x:Key="RemoveCommand" />
+    <local:VisibilityConvert x:Key="visibilityConvert" />
+</ResourceDictionary>
